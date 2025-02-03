@@ -10,7 +10,7 @@ import simulator.model.VehicleStatus;
 public class Vehicle extends SimulatedObject{
 	private List<Junction> itinerary;
 	private int maxSpeed;
-	private int actSpeed;
+	private int speed;
 	private VehicleStatus status;
 	private Road road;
 	private int location;
@@ -51,8 +51,8 @@ public class Vehicle extends SimulatedObject{
 			throw new IllegalArgumentException("ERROR: c should be between 0 and 10");
 		}
 		else {
-			if(c < this.maxSpeed) this.actSpeed = c;
-			else this.actSpeed = this.maxSpeed;
+			if(c < this.maxSpeed) this.speed = c;
+			else this.speed = this.maxSpeed;
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class Vehicle extends SimulatedObject{
 		// TODO Auto-generated method stub
 		int prevLocation = this.location;
 		if(this.status == VehicleStatus.TRAVELING) {
-			if(this.location + this.actSpeed < this.road.getLength()) this.location += this.actSpeed;
+			if(this.location + this.speed < this.road.getLength()) this.location += this.actSpeed;
 			else this.location = this.road.getLength();
 			
 			int c = this.contClass * (this.location-prevLocation);
@@ -73,7 +73,37 @@ public class Vehicle extends SimulatedObject{
 		
 	}
 	
+	protected void moveToNextRoad() {
+		
+		//Completar cuando tengamos carretera
+		
+	}
 	
+	public int getLocation() {
+		return this.location;
+	}
+	
+	public int getSpeed() {
+		return this.speed;
+	}
+	public int getContClass() {
+		return this.contClass;
+	}
+	public VehicleStatus getStatus() {
+		return this.status;
+	}
+	public int getTotalCO2() {
+		return this.total_cont;
+	}
+	public List<Junction> getItinerary() {
+		return this.itinerary;
+	}
+	public Road getRoad() {
+		return this.road;
+	}
+	
+	
+	//Quitar velocidad cuando no es travelling
 	
 	
 	
