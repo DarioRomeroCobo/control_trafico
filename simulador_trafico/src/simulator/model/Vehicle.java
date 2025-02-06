@@ -17,7 +17,6 @@ public class Vehicle extends SimulatedObject{
 	private int contClass; //Level of contamination
 	private int total_cont; //Total contamination
 	private int total_dist; //Total distance
-	
 	Vehicle(String id, int maxSpeed, int contClass, List<Junction> itinerary) throws IllegalArgumentException{
 		  super(id);
 		  if(maxSpeed > 0 && contClass >= 0 && contClass <= 10 && itinerary.size() >= 2) {
@@ -26,14 +25,23 @@ public class Vehicle extends SimulatedObject{
 			  this.itinerary = Collections.unmodifiableList(new ArrayList<>(itinerary));
 		  }
 		  else throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
-		  // TODO complete
+		 
 		}
 
 	
 
 	@Override
 	public JSONObject report() {
-		// TODO Auto-generated method stub
+		/*
+		 "id" : "v1",
+		  "speed" : 20,
+		   "distance" : 60,
+		   "co2": 100,
+		   "class": 3,
+		   "status": "TRAVELING",
+		   "road" : "r4",
+		   "location" : 30
+		   */
 		return null;
 	}
 	
@@ -61,7 +69,7 @@ public class Vehicle extends SimulatedObject{
 		// TODO Auto-generated method stub
 		int prevLocation = this.location;
 		if(this.status == VehicleStatus.TRAVELING) {
-			if(this.location + this.speed < this.road.getLength()) this.location += this.actSpeed;
+			if(this.location + this.speed < this.road.getLength()) this.location += this.speed;
 			else this.location = this.road.getLength();
 			
 			int c = this.contClass * (this.location-prevLocation);
@@ -86,6 +94,10 @@ public class Vehicle extends SimulatedObject{
 	public int getSpeed() {
 		return this.speed;
 	}
+	public int getMaxSpeed() {
+		return this.maxSpeed;
+	}
+	
 	public int getContClass() {
 		return this.contClass;
 	}
