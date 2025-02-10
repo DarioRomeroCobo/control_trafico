@@ -7,15 +7,15 @@ import java.util.List;
 import org.json.JSONObject;
 
 public abstract class Road extends SimulatedObject{
-	private Junction srcJunc;
-	private Junction destJunc;
-	private int lenght;
-	private int maxSpeed;
-	private int actualSpeedLimit = maxSpeed;
-	private int contLimit;    //lı́mite de contaminación 
-	private Weather weather;
-	private int total_cont; //Total contamination
-	private List<Vehicle> vehicles;
+	protected Junction srcJunc;
+	protected Junction destJunc;
+	protected int lenght;
+	protected int maxSpeed;
+	protected int actualSpeedLimit = maxSpeed;
+	protected int contLimit;    //lı́mite de contaminación 
+	protected Weather weather;
+	protected int total_cont; //Total contamination
+	protected List<Vehicle> vehicles;
 	private VehicleComparator v;
 	
 	Road(String id, Junction srcJunc, Junction destJunc, int maxSpeed, int contLimit, int length, Weather weather) throws IllegalArgumentException {

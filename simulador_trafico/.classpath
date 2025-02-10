@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="U:/hlocal/git/control_trafico/simulador_trafico/lib/commons-cli-1.4.jar"/>
-	<classpathentry kind="lib" path="U:/hlocal/git/control_trafico/simulador_trafico/lib/json.jar"/>
+	<classpathentry kind="lib" path="C:/Universidad/Tp2/lib/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Universidad/Tp2/lib/json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
