@@ -3,6 +3,8 @@ package simulator.model;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 public class Junction extends SimulatedObject{
 	private List<Road> incomingRoads;
 	private Map<Junction,Road> outgoingRoads;
@@ -27,22 +29,22 @@ public class Junction extends SimulatedObject{
 		else throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
 	}
 
-	protected void addIncommingRoad(Road r) {
+	void addIncommingRoad(Road r) {
 		
 		
 	}
 	
-	protected void addOutGoingRoad(Road r) {
+	void addOutGoingRoad(Road r) {
 		
 		
 	}
 	
-	protected void enter(Vehicle v) {
+	void enter(Vehicle v) {
 		
 		
 	}
 	
-	protected Road roadTo(Junction j) {
+	Road roadTo(Junction j) {
 		return null;
 	}
 	@Override

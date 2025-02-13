@@ -1,5 +1,4 @@
 package simulator.model;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +8,7 @@ import simulator.model.VehicleStatus;
 
 public class Vehicle extends SimulatedObject{
 	private List<Junction> itinerary;
+	private int itineraryIndex;
 	private int maxSpeed;
 	private int speed;
 	private VehicleStatus status;
@@ -32,58 +32,60 @@ public class Vehicle extends SimulatedObject{
 
 	@Override
 	public JSONObject report() {
-		/*
-		 "id" : "v1",
-		  "speed" : 20,
-		   "distance" : 60,
-		   "co2": 100,
-		   "class": 3,
-		   "status": "TRAVELING",
-		   "road" : "r4",
-		   "location" : 30
-		   */
-		return null;
+		JSONObject report = new JSONObject();
+		report.put("id", this._id);
+		report.put("speed", this.speed);
+		report.put("distance", this.total_dist);
+		report.put("co2", this.total_cont);
+		report.put("class", this.contClass);
+		report.put("status", this.status.toString());
+		if(!(this.status == VehicleStatus.PENDING || this.status == VehicleStatus.ARRIVED)) {
+			report.put("road", this.road);
+			report.put("location", this.location);
+		}
+		return report;
 	}
 	
-	protected void setSpeed(int s) {
+	void setSpeed(int s) throws IllegalArgumentException {
 		if(s < 0) {
 			throw new IllegalArgumentException("ERROR: s should be positive");
 		}
 		else {
-			this.contClass = s;
+			this.speed = Math.min(s, this.maxSpeed);
 		}
 	}
 	
-	protected void setContaminationClass(int c) {
+	void setContaminationClass(int c)throws IllegalArgumentException {
 		if(c < 0 && c >10) {
 			throw new IllegalArgumentException("ERROR: c should be between 0 and 10");
 		}
 		else {
-			if(c < this.maxSpeed) this.speed = c;
-			else this.speed = this.maxSpeed;
+			this.contClass = c;
 		}
 	}
 	
 	@Override
-	protected void advance(int currTime) {
-		// TODO Auto-generated method stub
-		int prevLocation = this.location;
+	void advance(int currTime) {
+		
 		if(this.status == VehicleStatus.TRAVELING) {
-			if(this.location + this.speed < this.road.getLength()) this.location += this.speed;
-			else this.location = this.road.getLength();
-			
+			int prevLocation = this.location;
+			this.location = Math.min(this.location + this.speed, this.road.getLength());
 			int c = this.contClass * (this.location-prevLocation);
+			this.road.addContamination(c);
 			this.total_cont += c;
-			//AÑADIR C AL GRADO DE CONTAMINACION DE LA CARRETERA;
-			
-			if(this.location >= this.road.getLength()){}//ENTRA EN LA COLA DE CRUCE;
+			if(this.location >= this.road.getLength()) {
+				this.itinerary.get(this.itineraryIndex).enter(this);
+				this.status=VehicleStatus.WAITING;
+			}
 		}
 		
 	}
 	
-	protected void moveToNextRoad() {
-		
-		//Completar cuando tengamos carretera
+	void moveToNextRoad() {
+		if(this.status == VehicleStatus.PENDING) {
+			this.road = this.itinerary.get(0).roadTo(this.itinerary.get(itineraryIndex+1));
+		}
+		this.road = this.itinerary.get(itineraryIndex).roadTo(null);
 		
 	}
 	
