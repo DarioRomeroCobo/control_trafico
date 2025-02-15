@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +8,9 @@ import org.json.JSONObject;
 
 public class Junction extends SimulatedObject{
 	private List<Road> incomingRoads;
-	private Map<Junction,Road> outgoingRoads;
-	private Map<Road,List<Vehicles> _outRoadByJunction
 	private List<List<Vehicle>> queues;
+	private Map<Junction,Road> outgoingRoads;
+	private Map<Road,List<Vehicle>> _queueByRoad;
 	private int greenLightIndex;
 	private int lastSwitchingTime;
 	private LightSwitchingStrategy lsStrategy;
@@ -30,23 +31,31 @@ public class Junction extends SimulatedObject{
 		else throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
 	}
 
-	void addIncommingRoad(Road r) {
-		
-		
+	void addIncommingRoad(Road r) throws IllegalArgumentException  {
+		if(r.destJunc.equals(this)) {
+			this.incomingRoads.add(r);
+			List<Vehicle> v= new ArrayList<>();
+			this.queues.add(v);
+			this._queueByRoad.put(r, v);
+		}
+		else
+			throw new IllegalArgumentException("ERROR: the destJunction of the road is not equal to this junction");
 	}
 	
-	void addOutGoingRoad(Road r) {
-		
-		
+	void addOutGoingRoad(Road r) throws IllegalArgumentException{
+		if(r.srcJunc.equals(r)) {
+			this.outgoingRoads.put(this, r);
+		}
+		else
+			throw new IllegalArgumentException("ERROR: the destJunction of the road is not equal to this junction");
 	}
 	
 	void enter(Vehicle v) {
-		
-		
+		this._queueByRoad.get(v.getRoad()).add(v);
 	}
 	
 	Road roadTo(Junction j) {
-		return null;
+		return this.outgoingRoads.get(j);
 	}
 	@Override
 	void advance(int time) {
