@@ -17,6 +17,7 @@ public class Vehicle extends SimulatedObject{
 	private int contClass; //Level of contamination
 	private int total_cont; //Total contamination
 	private int total_dist; //Total distance
+	
 	Vehicle(String id, int maxSpeed, int contClass, List<Junction> itinerary) throws IllegalArgumentException{
 		  super(id);
 		  if(maxSpeed > 0 && contClass >= 0 && contClass <= 10 && itinerary.size() >= 2) {
@@ -76,17 +77,21 @@ public class Vehicle extends SimulatedObject{
 			if(this.location >= this.road.getLength()) {
 				this.itinerary.get(this.itineraryIndex).enter(this);
 				this.status=VehicleStatus.WAITING;
+				this.speed=0;
+				this.itineraryIndex++;
 			}
 		}
-		
 	}
 	
-	void moveToNextRoad() {
-		if(this.status == VehicleStatus.PENDING) {
-			this.road = this.itinerary.get(0).roadTo(this.itinerary.get(itineraryIndex+1));
-		}
-		this.road = this.itinerary.get(itineraryIndex).roadTo(null);
+	void moveToNextRoad() throws IllegalArgumentException{
 		
+		if(this.status == VehicleStatus.PENDING) 
+			this.road = this.itinerary.get(0).roadTo(this.itinerary.get(itineraryIndex+1));
+		else if(this.status == VehicleStatus.WAITING)
+		this.road = this.itinerary.get(itineraryIndex).roadTo(null);
+		else
+			throw new IllegalArgumentException("ERROR: the vehicleStatus is not PENDING or WAITING");
+			
 	}
 	
 	public int getLocation() {

@@ -1,15 +1,17 @@
 package simulator.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public abstract class Road extends SimulatedObject{
 	protected Junction srcJunc;
 	protected Junction destJunc;
-	protected int lenght;
+	protected int length;
 	protected int maxSpeed;
 	protected int actualSpeedLimit = maxSpeed;
 	protected int contLimit;    //lı́mite de contaminación 
@@ -20,14 +22,16 @@ public abstract class Road extends SimulatedObject{
 	
 	Road(String id, Junction srcJunc, Junction destJunc, int maxSpeed, int contLimit, int length, Weather weather) throws IllegalArgumentException {
 		  super(id);
-		  if(maxSpeed>0 && contLimit>=0 && lenght>0 && srcJunc!=null && destJunc!=null && weather!=null) {
+		  if(maxSpeed>0 && contLimit>=0 && length>0 && srcJunc!=null && destJunc!=null && weather!=null) {
 			  this.srcJunc=srcJunc;
 			  this.destJunc=destJunc;
 			  this.maxSpeed=maxSpeed;
 			  this.contLimit=contLimit;
-			  this.lenght=lenght;
+			  this.length=length;
 			  this.weather=weather;
-			  
+			  destJunc.addIncommingRoad(this);
+			  srcJunc.addOutGoingRoad(this);
+			  vehicles = new ArrayList<>();
 		  }
 		  else
 			  throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
@@ -75,19 +79,23 @@ public abstract class Road extends SimulatedObject{
 	}
 
 	@Override
-	public JSONObject report() {/*
-		 JSONObject info = new JSONObject();
-		    info.put("id", _type_tag);
-		    info.put("speedlimitc", _desc);
-		    JSONObject data = new JSONObject();
-		    fill_in_data(data);
-		    info.put("data", data);
-		    return info;
-		    */
-		return null;
+	public JSONObject report() {
+		 JSONObject report = new JSONObject();
+		report.put("id", this._id);
+		report.put("speedLimit", this.actualSpeedLimit);
+		report.put("weather", this.weather.toString());
+		report.put("co2", this.total_cont);
+		
+		JSONArray vehiclesArray = new JSONArray();
+	    for (Vehicle v : getVehicles()) {
+	        vehiclesArray.put(v.getId());
+	    }
+	  
+	    report.put("vehicles", vehiclesArray);
+		return report;
 	}
 	public int getLength(){
-		return this.lenght;
+		return this.length;
 	}
 	public Junction getDest() {
 		return this.destJunc;

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 public class Junction extends SimulatedObject{
 	private List<Road> incomingRoads;
 	private Map<Junction,Road> outgoingRoads;
+	private Map<Road,List<Vehicles> _outRoadByJunction
 	private List<List<Vehicle>> queues;
 	private int greenLightIndex;
 	private int lastSwitchingTime;
@@ -18,7 +19,7 @@ public class Junction extends SimulatedObject{
 	
 	Junction(String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor) throws IllegalArgumentException{
 		super(id);
-		if(!lsStrategy.equals(null) && dqStrategy.equals(null) && xCoor > 0 && yCoor > 0) {
+		if(!lsStrategy.equals(null) && !dqStrategy.equals(null) && xCoor > 0 && yCoor > 0) {
 		  
 		  this.lastSwitchingTime = 0;
 		  this.lsStrategy = lsStrategy;
