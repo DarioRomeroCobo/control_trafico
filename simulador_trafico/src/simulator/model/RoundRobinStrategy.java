@@ -3,7 +3,7 @@ package simulator.model;
 import java.util.List;
 
 public class RoundRobinStrategy implements LightSwitchingStrategy{
-	int timeSlot;
+	private int timeSlot;
 	
 	RoundRobinStrategy(int timeSlot){
 		this.timeSlot=timeSlot;

@@ -29,9 +29,10 @@ public abstract class Road extends SimulatedObject{
 			  this.contLimit=contLimit;
 			  this.length=length;
 			  this.weather=weather;
-			  destJunc.addIncommingRoad(this);
-			  srcJunc.addOutGoingRoad(this);
+			  
 			  vehicles = new ArrayList<>();
+			  this.destJunc.addIncommingRoad(this);
+			  this.srcJunc.addOutGoingRoad(this);
 		  }
 		  else
 			  throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
