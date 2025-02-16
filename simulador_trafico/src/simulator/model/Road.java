@@ -35,6 +35,7 @@ public abstract class Road extends SimulatedObject{
 			  vehicles = new ArrayList<>();
 			  this.destJunc.addIncommingRoad(this);
 			  this.srcJunc.addOutGoingRoad(this);
+			
 		  }
 		  else
 			  throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
@@ -84,7 +85,7 @@ public abstract class Road extends SimulatedObject{
 	public JSONObject report() {
 		 JSONObject report = new JSONObject();
 		report.put("id", this._id);
-		report.put("speedLimit", this.actualSpeedLimit);
+		report.put("speedlimit", this.actualSpeedLimit);
 		report.put("weather", this.weather.toString());
 		report.put("co2", this.total_cont);
 		

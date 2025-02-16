@@ -151,6 +151,8 @@ class VehicleTest {
 		JSONObject jo = new JSONObject(s);
 		
 		JSONObject report = v1.report();
+		System.out.println(report);
+		System.out.println(jo);
 		assertTrue(jo.similar(report));
 	}
 

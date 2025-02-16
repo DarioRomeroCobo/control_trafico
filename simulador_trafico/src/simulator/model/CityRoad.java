@@ -13,8 +13,7 @@ public class CityRoad extends Road{
 		int x;
 		if(this.weather.equals(Weather.WINDY) || this.weather.equals(Weather.STORM)) x = 10;
 		else x = 2;
-		this.total_cont = this.total_cont - x;
-		
+		if(this.total_cont -x >= 0) this.total_cont -= x;
 	}
 
 	@Override

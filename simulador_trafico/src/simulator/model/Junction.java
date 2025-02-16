@@ -52,7 +52,7 @@ public class Junction extends SimulatedObject{
 	
 	void addOutGoingRoad(Road r) throws IllegalArgumentException{
 		if(r.getSrc().equals(this)) 
-			this.outgoingRoads.put(this, r);
+			this.outgoingRoads.put(r.getDest(), r);
 		else
 			throw new IllegalArgumentException("ERROR: the destJunction of the road is not equal to this junction");
 	}

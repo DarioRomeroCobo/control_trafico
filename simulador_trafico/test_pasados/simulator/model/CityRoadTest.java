@@ -71,6 +71,8 @@ class CityRoadTest {
 
 		// move the vehicle in road 'r1'
 		r1.advance(0);
+		
+
 
 		// the road should be r1
 		assertEquals(v2, r1.getVehicles().get(0));
@@ -117,7 +119,9 @@ class CityRoadTest {
 		v2.moveToNextRoad();
 
 		String s = "{\"speedlimit\":100,\"co2\":0,\"weather\":\"SUNNY\",\"vehicles\":[\"v1\",\"v2\"],\"id\":\"r1\"}";
-
+		System.out.println(new JSONObject(s));
+		System.out.println(r1.report());
+		
 		assertTrue(new JSONObject(s).similar(r1.report()));
 
 		r1.advance(1);
