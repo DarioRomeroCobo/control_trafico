@@ -13,7 +13,7 @@ public abstract class Road extends SimulatedObject{
 	protected Junction destJunc;
 	protected int length;
 	protected int maxSpeed;
-	protected int actualSpeedLimit = maxSpeed;
+	protected int actualSpeedLimit;
 	protected int contLimit;    //lı́mite de contaminación 
 	protected Weather weather;
 	protected int total_cont; //Total contamination
@@ -26,18 +26,19 @@ public abstract class Road extends SimulatedObject{
 			  this.srcJunc=srcJunc;
 			  this.destJunc=destJunc;
 			  this.maxSpeed=maxSpeed;
+			  this.actualSpeedLimit=maxSpeed;
 			  this.contLimit=contLimit;
 			  this.length=length;
 			  this.weather=weather;
-			  
+			  this.total_cont=0;
+			  this.v= new VehicleComparator();
 			  vehicles = new ArrayList<>();
 			  this.destJunc.addIncommingRoad(this);
 			  this.srcJunc.addOutGoingRoad(this);
 		  }
 		  else
 			  throw new IllegalArgumentException("Error 404"); //Cambiar excpecion: tiene que decir lo que ha fallado
-		}
-	
+	}
 	void enter(Vehicle v) throws IllegalArgumentException {
 		if(v.getLocation()==0 && v.getSpeed()==0)
 		vehicles.add(v);

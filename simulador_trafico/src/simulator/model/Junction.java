@@ -40,7 +40,7 @@ public class Junction extends SimulatedObject{
 	}
 
 	void addIncommingRoad(Road r) throws IllegalArgumentException  {
-		if(r.destJunc.equals(this)) {
+		if(r.getDest().equals(this)) {
 			this.incomingRoads.add(r);
 			List<Vehicle> v= new ArrayList<>();
 			this.queues.add(v);
@@ -51,9 +51,8 @@ public class Junction extends SimulatedObject{
 	}
 	
 	void addOutGoingRoad(Road r) throws IllegalArgumentException{
-		if(r.srcJunc.equals(r)) {
+		if(r.getSrc().equals(this)) 
 			this.outgoingRoads.put(this, r);
-		}
 		else
 			throw new IllegalArgumentException("ERROR: the destJunction of the road is not equal to this junction");
 	}
