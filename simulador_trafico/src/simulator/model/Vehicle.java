@@ -104,7 +104,7 @@ public class Vehicle extends SimulatedObject {
 				this.status = VehicleStatus.ARRIVED;
 				this.road = null;
 			} else {
-				this.road = this.itinerary.get(itineraryIndex).roadTo(this.itinerary.get(itineraryIndex));
+				this.road = this.itinerary.get(itineraryIndex).roadTo(this.itinerary.get(itineraryIndex+1));
 				this.status = VehicleStatus.TRAVELING;
 				road.enter(this);
 			}
