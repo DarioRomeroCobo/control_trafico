@@ -16,7 +16,7 @@ public class TrafficSimulator {
 	     _time = 0;
 	 }
 	 
-	 public void addEvent(Event e) {
+	 public void addEvent(Event e) throws IllegalArgumentException{
 		 if(e._time>this._time) {
 			 this._events.add(e); //Se ordena solo porque es PriorityQueue
 		 }
