@@ -19,8 +19,9 @@ class MainTest {
 			File expectedOutFile = new File(expOutFile);
 			
 			JSONObject jo1 = new JSONObject(new JSONTokener(new FileInputStream(currRunOutFile)));
+			System.out.println(jo1);
 			JSONObject jo2 = new JSONObject(new JSONTokener(new FileInputStream(expectedOutFile)));
-			
+			System.out.println(jo2);
 			//currRunOutFile.delete();
 			
 			return jo1.similar(jo2);
