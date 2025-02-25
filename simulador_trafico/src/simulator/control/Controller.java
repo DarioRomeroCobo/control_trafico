@@ -31,6 +31,6 @@ public class Controller {
 	}
 	
 	public void reset() {
-		this.sim.reset();
+		this._sim.reset();
 	}
 }
