@@ -12,7 +12,7 @@ public class NewInterCityRoadEventBuilder extends NewRoadEventBuilder {
 
 	@Override
 	protected NewInterCityRoadEvent create_instance(JSONObject data) {
-		inicialize(data);
+		super.initialize(data);
 		return new NewInterCityRoadEvent(time,id,src,dest,length,co2limit,maxSpeed,weather);
 	}
 

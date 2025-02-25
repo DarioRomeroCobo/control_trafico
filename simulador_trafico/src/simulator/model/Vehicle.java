@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.json.JSONObject;
-import simulator.model.SimulatedObject;
-import simulator.model.VehicleStatus;
 
 public class Vehicle extends SimulatedObject {
 	private List<Junction> itinerary;

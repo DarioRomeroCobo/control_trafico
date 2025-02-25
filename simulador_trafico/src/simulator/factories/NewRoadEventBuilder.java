@@ -24,7 +24,7 @@ public abstract class NewRoadEventBuilder extends Builder<NewRoadEvent>{
 	protected abstract NewRoadEvent create_instance(JSONObject data);
 		
        
-	protected void inicialize(JSONObject data) {
+	protected void initialize(JSONObject data) {
 		time = data.getInt("time");
         id = data.getString("id");
         src = data.getString("src");

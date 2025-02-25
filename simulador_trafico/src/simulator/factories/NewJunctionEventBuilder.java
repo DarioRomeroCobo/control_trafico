@@ -1,7 +1,5 @@
 package simulator.factories;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,13 +9,13 @@ import simulator.model.LightSwitchingStrategy;
 import simulator.model.NewJunctionEvent;
 
 public class NewJunctionEventBuilder extends Builder<NewJunctionEvent> {
-	private LightSwitchingStrategy lss;
-	private DequeuingStrategy ds;
+	private Factory<LightSwitchingStrategy> lssFactory;
+	private Factory<DequeuingStrategy> dqsFactory;
 	
 	public NewJunctionEventBuilder(Factory<LightSwitchingStrategy> lssFactory, Factory<DequeuingStrategy> dqsFactory) {
 		super("new_junction","A new junction");
-		lss=lssFactory.create_instance(get_info());
-		ds=dqsFactory.create_instance(get_info());
+		this.lssFactory=lssFactory;
+		this.dqsFactory=dqsFactory;
 	}
 
 	@Override
@@ -25,12 +23,15 @@ public class NewJunctionEventBuilder extends Builder<NewJunctionEvent> {
 		int time = data.getInt("time");
 		String id = data.getString("id");
 		
+		
 		JSONArray array = data.getJSONArray("coor");
         int x= array.getInt(0);
         int y=array.getInt(1);
         
-		
-		return new NewJunctionEvent(time,id,lss, ds,x,y) ;
+        LightSwitchingStrategy lss = this.lssFactory.create_instance(data.getJSONObject("ls_strategy"));
+    	DequeuingStrategy ds = this.dqsFactory.create_instance(data.getJSONObject("dq_strategy"));
+    	
+		return new NewJunctionEvent(time,id,lss,ds,x,y) ;
 	}
 
 }
