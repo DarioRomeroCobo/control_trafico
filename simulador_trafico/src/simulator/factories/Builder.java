@@ -30,6 +30,7 @@ public abstract class Builder<T> {
 	}
 
 	protected void fill_in_data(JSONObject o) {
+
 	}
 
 	@Override
