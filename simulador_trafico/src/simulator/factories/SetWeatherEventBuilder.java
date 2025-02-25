@@ -7,10 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simulator.misc.Pair;
+import simulator.model.Event;
 import simulator.model.SetWeatherEvent;
 import simulator.model.Weather;
 
-public class SetWeatherEventBuilder extends Builder<SetWeatherEvent> {
+public class SetWeatherEventBuilder extends Builder<Event> {
 
 	public SetWeatherEventBuilder() {
 		super("set_weather", "A new set weather event");
