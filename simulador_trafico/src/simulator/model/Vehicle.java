@@ -81,7 +81,7 @@ public class Vehicle extends SimulatedObject {
 			this.road.addContamination(c);
 			this.total_cont += c;
 			if (this.location >= this.road.getLength()) {
-				this.itinerary.get(this.itineraryIndex).enter(this);
+				this.road.getDest().enter(this);
 				this.status = VehicleStatus.WAITING;
 				this.speed = 0;
 				this.itineraryIndex++;

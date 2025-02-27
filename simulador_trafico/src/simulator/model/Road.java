@@ -42,7 +42,7 @@ public abstract class Road extends SimulatedObject{
 	}
 	void enter(Vehicle v) throws IllegalArgumentException {
 		if(v.getLocation()==0 && v.getSpeed()==0)
-		vehicles.add(v);
+			vehicles.add(v);
 		else throw new IllegalArgumentException("ERROR: la localización del vehı́culo no es 0 o que la velocidad del vehı́culo no es 0"); 
 	}
 	
