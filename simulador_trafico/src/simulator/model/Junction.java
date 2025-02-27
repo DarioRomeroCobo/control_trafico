@@ -20,8 +20,6 @@ public class Junction extends SimulatedObject{
 	private int x;
 	private int y;
 	
-	private int cont = 0;
-	
 	Junction(String id, LightSwitchingStrategy lsStrategy, DequeuingStrategy dqStrategy, int xCoor, int yCoor) throws IllegalArgumentException{
 		super(id);
 		if(lsStrategy!=null && dqStrategy!= null && xCoor >= 0 && yCoor >= 0) {
