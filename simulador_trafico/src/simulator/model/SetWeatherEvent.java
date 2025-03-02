@@ -19,11 +19,10 @@ public class SetWeatherEvent extends Event {
 	@Override
 	void execute(RoadMap map) {
 		for (Pair<String, Weather> pair : this.ws) {
-				Road r= map.getRoad(pair.getFirst());
-			if( r!=null){
+			Road r = map.getRoad(pair.getFirst());
+			if (r != null) {
 				r.setWeather(pair.getSecond());
-			}
-			else
+			} else
 				throw new IllegalArgumentException("ERROR: the road does not exists in the map");
 		}
 

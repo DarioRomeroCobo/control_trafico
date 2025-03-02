@@ -1,6 +1,6 @@
 package simulator.model;
 
-public class CityRoad extends Road{
+public class CityRoad extends Road {
 
 	CityRoad(String id, Junction srcJunc, Junction destJunc, int maxSpeed, int contLimit, int length, Weather weather)
 			throws IllegalArgumentException {
@@ -11,20 +11,23 @@ public class CityRoad extends Road{
 	@Override
 	void reduceTotalContamination() {
 		int x;
-		if(this.weather.equals(Weather.WINDY) || this.weather.equals(Weather.STORM)) x = 10;
-		else x = 2;
-		if(this.total_cont -x >= 0) this.total_cont -= x;
+		if (this.weather.equals(Weather.WINDY) || this.weather.equals(Weather.STORM))
+			x = 10;
+		else
+			x = 2;
+		if (this.total_cont - x >= 0)
+			this.total_cont -= x;
 	}
 
 	@Override
 	void updateSpeedLimit() {
-		//No tiene utilidad
-		
+		// No tiene utilidad
+
 	}
 
 	@Override
 	int calculateVehicleSpeed(Vehicle v) {
-		return ((11-v.getContClass())*this.actualSpeedLimit)/11;
+		return ((11 - v.getContClass()) * this.actualSpeedLimit) / 11;
 	}
 
 }

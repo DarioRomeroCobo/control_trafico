@@ -55,8 +55,7 @@ public class Vehicle extends SimulatedObject {
 	void setSpeed(int s) throws IllegalArgumentException {
 		if (s < 0) {
 			throw new IllegalArgumentException("ERROR: s should be positive");
-		} 
-		else if(this.status.equals(VehicleStatus.TRAVELING)){
+		} else if (this.status.equals(VehicleStatus.TRAVELING)) {
 			this.speed = Math.min(s, this.maxSpeed);
 		}
 	}
@@ -75,7 +74,7 @@ public class Vehicle extends SimulatedObject {
 		if (this.status == VehicleStatus.TRAVELING) {
 			int prevLocation = this.location;
 			this.location = Math.min(this.location + this.speed, this.road.getLength());
-			int parcialDist = this.location - prevLocation; //Distancia recorrida en este paso de la simulacion
+			int parcialDist = this.location - prevLocation; // Distancia recorrida en este paso de la simulacion
 			int c = this.contClass * (parcialDist);
 			this.total_dist += parcialDist;
 			this.road.addContamination(c);
@@ -96,13 +95,13 @@ public class Vehicle extends SimulatedObject {
 			if (this.road != null && this.itineraryIndex > 0) {
 				this.road.exit(this);
 				this.location = 0;
-				this.speed=0;
+				this.speed = 0;
 			}
 			if (this.itineraryIndex >= this.itinerary.size() - 1) {
 				this.status = VehicleStatus.ARRIVED;
 				this.road = null;
 			} else {
-				this.road = this.itinerary.get(itineraryIndex).roadTo(this.itinerary.get(itineraryIndex+1));
+				this.road = this.itinerary.get(itineraryIndex).roadTo(this.itinerary.get(itineraryIndex + 1));
 				this.status = VehicleStatus.TRAVELING;
 				road.enter(this);
 			}

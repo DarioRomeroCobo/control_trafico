@@ -11,31 +11,31 @@ import simulator.model.NewVehicleEvent;
 
 public class NewVehicleEventBuilder extends Builder<Event> {
 
-    public NewVehicleEventBuilder() {
-        super("new_vehicle", "A new vehicle");
-    }
-    
-    protected void fillInData(JSONObject o) {
-        o.put("time", 0);
-        o.put("maxspeed", 0);
-        o.put("contClass", 0);
-        o.put("itinerary",0);	
-    }
+	public NewVehicleEventBuilder() {
+		super("new_vehicle", "A new vehicle");
+	}
 
-    protected Event create_instance(JSONObject data) {
-        int time = data.getInt("time");
-        String id = data.getString("id");
-        int maxSpeed = data.getInt("maxspeed");
-        int contClass = data.getInt("class");
-        
-        JSONArray array = data.getJSONArray("itinerary");
-        List<String> itinerary = new ArrayList<>();
+	protected void fillInData(JSONObject o) {
+		o.put("time", 0);
+		o.put("maxspeed", 0);
+		o.put("contClass", 0);
+		o.put("itinerary", 0);
+	}
 
-        for (int i = 0; i < array.length(); i++) {
-        	 itinerary.add(array.getString(i));
-        }
-            
-        return new NewVehicleEvent(time, id, maxSpeed, contClass, itinerary);
-    }
+	protected Event create_instance(JSONObject data) {
+		int time = data.getInt("time");
+		String id = data.getString("id");
+		int maxSpeed = data.getInt("maxspeed");
+		int contClass = data.getInt("class");
+
+		JSONArray array = data.getJSONArray("itinerary");
+		List<String> itinerary = new ArrayList<>();
+
+		for (int i = 0; i < array.length(); i++) {
+			itinerary.add(array.getString(i));
+		}
+
+		return new NewVehicleEvent(time, id, maxSpeed, contClass, itinerary);
+	}
 
 }
