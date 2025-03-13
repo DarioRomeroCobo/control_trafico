@@ -26,12 +26,17 @@ public class SetWeatherEventBuilder extends Builder<Event> {
 
 		JSONArray array = data.getJSONArray("info");
 		JSONObject o;
-
 		for (int i = 0; i < array.length(); i++) {
 			o = array.getJSONObject(i);
 			sw.add(new Pair<>(o.getString("road"), Weather.valueOf(o.getString("weather").toUpperCase())));
 
 		}
+		
+		/*JSONObject o;
+		for(Object obj: array) {
+			o = (JSONObject) obj;
+			sw.add(new Pair<>(o.getString("road"), Weather.valueOf(o.getString("weather").toUpperCase())));
+		}*/
 
 		return new SetWeatherEvent(time, sw);
 	}

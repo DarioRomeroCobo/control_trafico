@@ -21,8 +21,7 @@ public abstract class NewRoadEventBuilder extends Builder<Event> {
 		super(typeTag, desc);
 	}
 
-	@Override
-	protected abstract NewRoadEvent create_instance(JSONObject data);
+	
 
 	protected void initialize(JSONObject data) {
 		time = data.getInt("time");

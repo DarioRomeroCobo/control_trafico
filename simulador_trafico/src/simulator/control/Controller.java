@@ -37,7 +37,6 @@ public class Controller {
 			}
 		} else
 			throw new IllegalArgumentException("ERROR: the input is incorrect");
-		// factorias
 	}
 
 	public void run(int n, OutputStream out) {

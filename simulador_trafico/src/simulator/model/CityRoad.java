@@ -17,6 +17,8 @@ public class CityRoad extends Road {
 			x = 2;
 		if (this.total_cont - x >= 0)
 			this.total_cont -= x;
+		else this.total_cont = 0;
+			
 	}
 
 	@Override
