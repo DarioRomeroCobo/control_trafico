@@ -105,7 +105,7 @@ class RoadMapTest {
 		map.addVehicle(v2);
 		
 		// Invalid itinerary 
-		assertThrows(Exception.class, () ->map.addVehicle(v3));
+		assertThrows(IllegalArgumentException.class, () ->map.addVehicle(v3));
 
 
 		// cannot add object with same id

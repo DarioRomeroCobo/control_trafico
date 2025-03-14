@@ -52,10 +52,12 @@ public class RoadMap {
 		if (!vehicleMap.containsKey(v.getId())) {
 			List<Junction> itinerary = v.getItinerary();
 			Junction j, jNext;
+			Road r;
 			for (int i = 0; i < itinerary.size() - 1; i++) {
 				j = itinerary.get(i);
 				jNext = itinerary.get(i + 1);
-				if (!roadMap.containsKey(j.roadTo(jNext).getId()))
+				r = j.roadTo(jNext);
+				if (r == null || !roadMap.containsKey(r.getId()))
 					throw new IllegalArgumentException("ERROR: the itinerary is not valid");
 			}
 			vehicleList.add(v);
