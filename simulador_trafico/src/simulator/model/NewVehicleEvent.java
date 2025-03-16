@@ -34,4 +34,10 @@ public class NewVehicleEvent extends Event {
 		v.moveToNextRoad();
 	}
 
+	@Override
+	public String toString() {
+
+		return "New Vehicle " + id + " Max Speed " + maxSpeed + " Cont Class " + contClass + " Itinerary " + itinerary;
+	}
+
 }
